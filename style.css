@@ -1,6 +1,6 @@
 html{
     height: 100%;
-    /* background: radial-gradient(circle, #fff, #ccc); */
+    /* background: radial-gradient(circle, #fff, #ccc); was the default background color*/
     background: #121212;
 }
 #container{
@@ -41,7 +41,7 @@ html{
 }
 #question{
     width: 450px;
-    height: 150px; /* Use line-height property if you increase the height */
+    height: 150px; /* use line-height property if you increase the height */
     margin: 50px auto 10px auto;
     background-color: #9DA0EA;
     box-shadow: 0px 4px #535aa8;
@@ -60,6 +60,7 @@ html{
     box-shadow: 0px 4px #8153a8;
 }
 #choices{
+    display: flex;
     width: 400px;
     height: 100px;
     margin: 5px auto;
@@ -68,7 +69,6 @@ html{
     width: 85px;
     height: 85px;
     background-color: white;
-    float: left;
     margin-left: 13px;
     border-radius: 3px;
     cursor: pointer;
@@ -96,9 +96,6 @@ html{
     -moz-box-shadow: 0px 0px #6b54d3;
     -webkit-box-shadow: 0px 0px #6b54d3;
     top: 4px;
-}
-.box4{
-    margin-right: 0;
 }
 #startreset{
     width: 78px;
