@@ -1,25 +1,28 @@
-var start = document.getElementById("startreset");
-var correct_block = document.getElementById("correct");
-var incorrect_block = document.getElementById("wrong");
-var score_value = document.getElementById("scoreValue");
-var time_block = document.getElementById("timeremaining");
-var gameOver = document.getElementById("gameOver");
-var x = 0; // score
+const start = document.getElementById("startreset");
+const correct_block = document.getElementById("correct");
+const incorrect_block = document.getElementById("wrong");
+const score_value = document.getElementById("scoreValue");
+const time_block = document.getElementById("timeremaining");
+const gameOver = document.getElementById("gameOver");
+const instruction = document.getElementById("instruction");
+const questionField = document.getElementById("question");
+var score = 0; // score
+var eq1, eq2, result;
 function start_game() {
     if (start.textContent === "Start Game") {
         start.textContent = "Reset Game";
         time_block.style.display = "block";
-        var eq1 = equation(1, 10);
-        var eq2 = equation(1, 10);
-        var result = multiplyNums(eq1, eq2);
-        var questionField = document.getElementById("question");
+        instruction.textContent = "Click on the correct answer";
+        eq1 = equation(1, 10);
+        eq2 = equation(1, 10);
+        result = eq1 * eq2;
         questionField.textContent = `${eq1} x ${eq2}`;
         var all_divs = document.querySelectorAll(".box");
         var numbers = [result, generateNum(1, 100), generateNum(1, 100), generateNum(1, 100)];
         var boxes = document.querySelectorAll(".box");
-        
+
         for (let i = numbers.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
+            let j = Math.floor(Math.random() * (i + 1));
             [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
         }
         numbers.forEach((number, index) => {
@@ -30,8 +33,8 @@ function start_game() {
                 var selected_div = all_divs.textContent;
 
                 if (selected_div === result.toString()) {
-                    x++;
-                    score_value.innerHTML = x;
+                    score++;
+                    score_value.innerHTML = score;
                     correct_block.style.display = "block";
                     setTimeout(() => {
                         correct_block.style.display = "none";
@@ -39,14 +42,14 @@ function start_game() {
 
                     eq1 = equation(1, 10);
                     eq2 = equation(1, 10);
-                    result = multiplyNums(eq1, eq2);
+                    result = eq1 * eq2;
                     questionField.textContent = `${eq1} x ${eq2}`;
-                    var newNumbers = [result, generateNum(1, 100), generateNum(1, 100), generateNum(1, 100)];
-                    for (let i = newNumbers.length - 1; i > 0; i--) {
+                    numbers = [result, generateNum(1, 100), generateNum(1, 100), generateNum(1, 100)];
+                    for (let i = numbers.length - 1; i > 0; i--) {
                         var j = Math.floor(Math.random() * (i + 1));
-                        [newNumbers[i], newNumbers[j]] = [newNumbers[j], newNumbers[i]];
+                        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
                     }
-                    newNumbers.forEach((number, index) => {
+                    numbers.forEach((number, index) => {
                         boxes[index].textContent = number;
                     });
                 }
@@ -79,7 +82,7 @@ function timer() {
         else {
             clearInterval(timerInterval);
             gameOver.style.display = "block";
-            gameOver.innerHTML = "GAME OVER<br>YOUR SCORE: " + x;
+            gameOver.innerHTML = "GAME OVER<br>YOUR SCORE: " + score;
             gameOver.style.lineHeight = "2.5em";
         }
     }
@@ -92,7 +95,4 @@ function generateNum(min, max) {
 function equation(min, max) {
     //return Math.floor(Math.random() * 10) + 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function multiplyNums(a, b) {
-    return a * b;
 }
