@@ -84,9 +84,13 @@ function timer() {
             gameOver.style.display = "block";
             gameOver.innerHTML = "GAME OVER<br>YOUR SCORE: " + score;
             gameOver.style.lineHeight = "2.5em";
+            hide("choices");
         }
     }
     var timerInterval = setInterval(timer_decrease, 1000);
+}
+function hide(Id){
+    document.getElementById(Id).style.display = "none";   
 }
 function generateNum(min, max) {
     //return Math.floor(Math.random() * 99) + 1;
