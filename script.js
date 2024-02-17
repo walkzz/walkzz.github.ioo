@@ -69,7 +69,7 @@ function start_game() {
 }
 
 function timer() {
-    let timer = 60;
+    let timer = 2;
     var time_remain = () => {
         document.getElementById("timeremainingvalue").textContent = timer;
     };
